@@ -3,7 +3,7 @@
     /* Environment */
     "target": "es2016",
     "lib": ["ESNext", "DOM"],
-    "jsx": "react-jsx",
+    "jsx": "react-jsxdev",
     "types": ["react"],
 
     /* Modules */
@@ -18,7 +18,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true,
+    // "noUnusedLocals": true,
     "noFallthroughCasesInSwitch": true
 
     // "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */

@@ -1,15 +1,13 @@
-import imageAsset from "./assets/asset.png";
+import React from "react";
+import { RouterProvider } from "react-router-dom";
+import Template from "./components/Template";
+import router from "./router";
 
 const App: React.FC = () => {
   return (
-    <div>
-      <h1>hello world</h1>
-      <h3>external image</h3>
-      <img src="image.png" />
-
-      <h3>internal image</h3>
-      <img src={imageAsset} />
-    </div>
+    <Template>
+      <RouterProvider router={router} future={{ v7_startTransition: true }} />
+    </Template>
   );
 };
 

@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const { ModuleFederationPlugin } = require("webpack").container;
 
 const path = require("path");
 const webpack = require("webpack");
@@ -13,19 +14,21 @@ module.exports = (webpackEnv) => {
     : isEnvDevelopment && "development";
 
   const pathConfig = {
-    entry: "./src/index.tsx",
+    entry: "./src/index",
     output: {
       path: path.join(__dirname, "/dist"),
       filename: "[name].js",
       assetModuleFilename: "images/[hash][ext][query]",
+      publicPath: "/",
     },
   };
 
   const devConfig = {
     devtool: isEnvDevelopment ? "hidden-source-map" : "eval",
     devServer: {
-      port: 3000,
-      hot: true,
+      host: "localhost",
+      port: 3300,
+      historyApiFallback: true,
     },
   };
 
@@ -43,6 +46,10 @@ module.exports = (webpackEnv) => {
       {
         test: /\.(png|jpg|svg)$/,
         type: "asset/resource",
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ],
   };
@@ -64,6 +71,15 @@ module.exports = (webpackEnv) => {
       patterns: [{ from: "public" }],
     }),
     new CleanWebpackPlugin(),
+    new ModuleFederationPlugin({
+      name: "service",
+      remotes: {
+        editor: "editor@http://localhost:3000/remoteEntry.js",
+      },
+      shared: {
+        react: { singleton: true, eager: true },
+      },
+    }),
   ];
 
   return {
