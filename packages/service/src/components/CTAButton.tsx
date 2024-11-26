@@ -24,7 +24,7 @@ const CTAButton = ({
   return (
     <button
       className={cn(
-        "px-4 rounded disabled:cursor-not-allowed",
+        "px-4 rounded disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors",
         isFullWidth && "w-full",
         variant === "filled" &&
           "bg-slate-900 text-white disabled:bg-slate-300 hover:bg-slate-800",
