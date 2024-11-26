@@ -31,7 +31,7 @@ const EditorDrawingPage = () => {
 
   return (
     <>
-      <EditorHeader title="글자 가리기" stepIndex={1} />
+      <EditorHeader title="글자 가리기" stepIndex={2} />
 
       <div className="bottom absolute bottom-0 left-0 w-full flex flex-col">
         <div className="pb-6 flex gap-2 justify-center">
