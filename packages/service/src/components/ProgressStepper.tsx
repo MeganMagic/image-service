@@ -6,7 +6,6 @@ export interface Step {
   index: number;
   label: string;
   onClick: () => void;
-  renderIcon: (options: { className: string }) => JSX.Element;
 }
 
 interface ProgressStepperProps {
@@ -16,45 +15,24 @@ interface ProgressStepperProps {
 
 const ProgressStepper = ({ steps, currentStepIndex }: ProgressStepperProps) => {
   return (
-    <ul
-      id="progress-stepper"
-      className="relative w-full flex gap-3 items-center"
-    >
+    <ul id="progress-stepper" className="relative w-full flex items-center">
       {steps.map((step, index) => {
         const isStepDone = step.index < currentStepIndex;
         const isCurrentStep = step.index === currentStepIndex;
 
         return (
           <Fragment key={`progress-step-${step.index}`}>
-            <li onClick={step.onClick} className={"relative"}>
+            <li onClick={step.onClick} className={"relative group"}>
               <div
                 className={cn(
-                  "w-8 h-8 rounded-full flex justify-center items-center",
-                  isStepDone || isCurrentStep
-                    ? "bg-emerald-500"
-                    : "bg-slate-300"
+                  "w-6 h-6 rounded-full flex justify-center items-center",
+                  isStepDone || isCurrentStep ? "bg-slate-900" : "bg-slate-300"
                 )}
               >
                 {isStepDone ? (
                   <Check className="w-4 h-4 text-white" />
                 ) : (
-                  step.renderIcon({
-                    className: "w-4 h-4 text-white",
-                  })
-                )}
-              </div>
-              <div>
-                {isCurrentStep && (
-                  <span
-                    className={cn(
-                      "absolute top-full mt-1 text-xs font-medium whitespace-nowrap",
-                      isStepDone || isCurrentStep
-                        ? "text-emerald-500"
-                        : "text-slate-300"
-                    )}
-                  >
-                    {step.label}
-                  </span>
+                  <span className="text-base text-white">{step.index}</span>
                 )}
               </div>
             </li>
@@ -62,7 +40,7 @@ const ProgressStepper = ({ steps, currentStepIndex }: ProgressStepperProps) => {
               <div
                 className={cn(
                   "w-full h-1",
-                  isStepDone ? "bg-emerald-500" : "bg-slate-300"
+                  isStepDone ? "bg-slate-900" : "bg-slate-300"
                 )}
               />
             )}
