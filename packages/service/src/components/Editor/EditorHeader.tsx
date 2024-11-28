@@ -48,6 +48,7 @@ const EditorHeader = ({ title, stepIndex }: EditorHeaderProps) => {
         title={title}
         leftBarButtonItems={[
           {
+            label: "취소",
             renderIcon: (options) => <span {...options}>취소</span>,
             onClick: () => console.log("취소"),
           },

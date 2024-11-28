@@ -1,4 +1,5 @@
 interface BarButtonItem {
+  label: string;
   renderIcon: (options: { className: string }) => JSX.Element;
   onClick: () => void;
 }
@@ -19,7 +20,7 @@ const Header = ({
       <div>
         {leftBarButtonItems &&
           leftBarButtonItems.map((item) => (
-            <button>
+            <button key={`left-bar-button-${item.label}`}>
               {item.renderIcon({
                 className: "text-base text-slate-500 font-regular",
               })}
@@ -33,7 +34,7 @@ const Header = ({
 
       {rightBarButtonItems &&
         rightBarButtonItems.map((item) => (
-          <button>
+          <button key={`right-bar-button-${item.label}`}>
             {item.renderIcon({
               className: "text-base text-slate-500 font-regular",
             })}

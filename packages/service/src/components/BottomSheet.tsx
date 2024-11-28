@@ -1,5 +1,6 @@
 import { PropsWithChildren, useRef } from "react";
 import { useOnClickOutside } from "../utils/useOnClickOutside";
+import Header from "./Header";
 
 interface BottomSheetProps extends PropsWithChildren {
   title: string;
@@ -17,12 +18,20 @@ const BottomSheet = ({ title, children, onClose }: BottomSheetProps) => {
 
       <div
         ref={bottomSheetRef}
-        className="w-full flex flex-col absolute bottom-0 bg-white rounded-t-md"
+        className="w-full flex flex-col absolute bottom-0 bg-white rounded-t-xl"
       >
-        <div id="bottom-sheet-header" className="">
-          <span>{title}</span>
-        </div>
-        <div id="bottom-sheet-content" className="p-4">
+        <Header
+          title={title}
+          leftBarButtonItems={[
+            {
+              label: "닫기",
+              renderIcon: (options) => <span {...options}>닫기</span>,
+              onClick: onClose,
+            },
+          ]}
+        />
+
+        <div id="bottom-sheet-content" className="p-4 min-h-60">
           {children}
         </div>
       </div>
